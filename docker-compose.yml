@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql
+    container_name: task_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports: 
+      - "3306:3306"
+    volumes:
+      - task_db:/var/lib/mysql
+volumes:
+  task_db:
