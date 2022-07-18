@@ -5,16 +5,16 @@ import java.time.LocalDateTime;
 public class TaskPutRequest {
     private long id;
     private String task;
-    private boolean isComplete;
+    private boolean complete;
     private LocalDateTime date;
 
     public TaskPutRequest() {
     }
 
-    public TaskPutRequest(long id, String task, boolean isComplete, LocalDateTime date) {
+    public TaskPutRequest(long id, String task, boolean complete, LocalDateTime date) {
         this.id = id;
         this.task = task;
-        this.isComplete = isComplete;
+        this.complete = complete;
         this.date = date;
     }
 
@@ -35,11 +35,11 @@ public class TaskPutRequest {
     }
 
     public boolean isComplete() {
-        return isComplete;
+        return complete;
     }
 
     public void setComplete(boolean complete) {
-        isComplete = complete;
+        this.complete = complete;
     }
 
     public LocalDateTime getDate() {

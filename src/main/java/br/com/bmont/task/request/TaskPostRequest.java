@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 
 public class TaskPostRequest {
     private String task;
-    private boolean isComplete;
+    private boolean complete;
     private LocalDateTime date;
 
     public TaskPostRequest() {
     }
 
-    public TaskPostRequest(String task, boolean isComplete, LocalDateTime date) {
+    public TaskPostRequest(String task, boolean complete, LocalDateTime date) {
         this.task = task;
-        this.isComplete = isComplete;
+        this.complete = complete;
         this.date = date;
     }
 
@@ -25,11 +25,11 @@ public class TaskPostRequest {
     }
 
     public boolean isComplete() {
-        return isComplete;
+        return complete;
     }
 
     public void setComplete(boolean complete) {
-        isComplete = complete;
+        this.complete = complete;
     }
 
     public LocalDateTime getDate() {

@@ -3,7 +3,7 @@ package br.com.bmont.task.model;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "tb_user")
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,19 +9,20 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String task;
-    private boolean isComplete;
+    private boolean complete;
     private LocalDateTime date;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
     public Task() {
     }
 
-    public Task(long id, String task, boolean isComplete, LocalDateTime date) {
+    public Task(long id, String task, boolean complete, LocalDateTime date, User user) {
         this.id = id;
         this.task = task;
-        this.isComplete = isComplete;
+        this.complete = complete;
         this.date = date;
+        this.user = user;
     }
 
     public long getId() {
@@ -41,11 +42,11 @@ public class Task {
     }
 
     public boolean isComplete() {
-        return isComplete;
+        return complete;
     }
 
     public void setComplete(boolean complete) {
-        isComplete = complete;
+        this.complete = complete;
     }
 
     public LocalDateTime getDate() {
@@ -54,5 +55,13 @@ public class Task {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
