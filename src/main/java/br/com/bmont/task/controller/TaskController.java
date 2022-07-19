@@ -1,15 +1,21 @@
 package br.com.bmont.task.controller;
 
+import br.com.bmont.task.model.User;
 import br.com.bmont.task.request.TaskPostRequest;
 import br.com.bmont.task.request.TaskPutRequest;
 import br.com.bmont.task.response.TaskResponse;
+import br.com.bmont.task.filter.TaskFilterParam;
 import br.com.bmont.task.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/tasks")
@@ -21,23 +27,30 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<TaskResponse>> findAllTasks(Pageable pageable){
-        return new ResponseEntity<>(taskService.findAllTasks(pageable), HttpStatus.OK);
+    public ResponseEntity<Page<TaskResponse>> findAllTasks(@AuthenticationPrincipal UserDetails userDetails,
+                                                           @RequestParam(required = false) String task,
+                                                           @RequestParam(required = false) String complete,
+                                                           @RequestParam(required = false)
+                                                           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                                               LocalDateTime date,
+                                                           Pageable pageable){
+        TaskFilterParam filter = new TaskFilterParam(task, complete, date, (User) userDetails);
+        return new ResponseEntity<>(taskService.findAllTasks(filter, pageable), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<TaskResponse> createTask(@RequestBody TaskPostRequest taskPostRequest){
-        return new ResponseEntity<>(taskService.createTask(taskPostRequest), HttpStatus.CREATED);
+    public ResponseEntity<TaskResponse> createTask(@AuthenticationPrincipal UserDetails userDetails, @RequestBody TaskPostRequest taskPostRequest){
+        return new ResponseEntity<>(taskService.createTask(userDetails, taskPostRequest), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<TaskResponse> updateTask(@RequestBody TaskPutRequest taskPutRequest){
-        return new ResponseEntity<>(taskService.updateTask(taskPutRequest), HttpStatus.OK);
+    public ResponseEntity<TaskResponse> updateTask(@AuthenticationPrincipal UserDetails userDetails, @RequestBody TaskPutRequest taskPutRequest){
+        return new ResponseEntity<>(taskService.updateTask(userDetails, taskPutRequest), HttpStatus.OK);
     }
 
     @DeleteMapping("/{taskId}")
-    public ResponseEntity<Void> deleteTask(@PathVariable long taskId){
-        taskService.deleteTask(taskId);
+    public ResponseEntity<Void> deleteTask(@AuthenticationPrincipal UserDetails userDetails, @PathVariable long taskId){
+        taskService.deleteTask(userDetails, taskId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

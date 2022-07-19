@@ -1,36 +1,23 @@
-package br.com.bmont.task.model;
+package br.com.bmont.task.filter;
 
-import javax.persistence.*;
+import br.com.bmont.task.model.User;
+
 import java.time.LocalDateTime;
 
-@Entity
-public class Task {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class TaskFilterParam {
     private String task;
-    private boolean complete;
+    private String complete;
     private LocalDateTime date;
-    @ManyToOne
     private User user;
 
-    public Task() {
+    public TaskFilterParam() {
     }
 
-    public Task(long id, String task, boolean complete, LocalDateTime date, User user) {
-        this.id = id;
+    public TaskFilterParam(String task, String complete, LocalDateTime date, User user) {
         this.task = task;
         this.complete = complete;
         this.date = date;
         this.user = user;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getTask() {
@@ -41,11 +28,11 @@ public class Task {
         this.task = task;
     }
 
-    public boolean isComplete() {
+    public String getComplete() {
         return complete;
     }
 
-    public void setComplete(boolean complete) {
+    public void setComplete(String complete) {
         this.complete = complete;
     }
 
