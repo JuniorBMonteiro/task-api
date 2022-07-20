@@ -1,5 +1,7 @@
 package br.com.bmont.task.service;
 
+import br.com.bmont.task.exception.EntityNotFoundException;
+import br.com.bmont.task.exception.PermissionIsMissingException;
 import br.com.bmont.task.filter.TaskFilterParam;
 import br.com.bmont.task.filter.TaskSpecifications;
 import br.com.bmont.task.mapper.TaskMapper;
@@ -59,14 +61,12 @@ public class TaskService {
 
     private Task findTaskByIdOrThrowException(long taskId){
         return taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Task not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Task not found"));
     }
 
     private void userIsOwner(User user, Task task){
         if(!Objects.equals(task.getUser(), user)){
-            throw new RuntimeException("User not is owner");
+            throw new PermissionIsMissingException("User not is owner");
         }
     }
-
-
 }

@@ -1,5 +1,6 @@
 package br.com.bmont.task.service;
 
+import br.com.bmont.task.exception.EntityAlreadyExistsException;
 import br.com.bmont.task.mapper.UserMapper;
 import br.com.bmont.task.model.User;
 import br.com.bmont.task.repository.UserRepository;
@@ -43,7 +44,7 @@ public class UserService implements UserDetailsService {
     private void validateCredentials(UserRequest user){
         Optional<User> userSaved= userRepository.findByUsernameOrEmail(user.getUsername(), user.getEmail());
         userSaved.ifPresent( e -> {
-            throw new RuntimeException("User is already registered");
+            throw new EntityAlreadyExistsException("User is already registered");
         });
     }
 }

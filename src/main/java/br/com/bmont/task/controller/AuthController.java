@@ -1,7 +1,6 @@
 package br.com.bmont.task.controller;
 
 import br.com.bmont.task.request.LoginRequest;
-import br.com.bmont.task.request.UserRequest;
 import br.com.bmont.task.response.TokenResponse;
 import br.com.bmont.task.service.AuthenticationService;
 import br.com.bmont.task.service.TokenService;
