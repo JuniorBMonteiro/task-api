@@ -1,6 +1,6 @@
 package br.com.bmont.task.service;
 
-import br.com.bmont.task.request.UserRequest;
+import br.com.bmont.task.request.LoginRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,7 +15,7 @@ public class AuthenticationService {
         this.authenticationManager = authenticationManager;
     }
 
-    public Authentication authenticate(UserRequest user){
+    public Authentication authenticate(LoginRequest user){
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                 = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         return authenticationManager.authenticate(usernamePasswordAuthenticationToken);

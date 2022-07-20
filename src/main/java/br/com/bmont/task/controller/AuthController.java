@@ -1,5 +1,6 @@
 package br.com.bmont.task.controller;
 
+import br.com.bmont.task.request.LoginRequest;
 import br.com.bmont.task.request.UserRequest;
 import br.com.bmont.task.response.TokenResponse;
 import br.com.bmont.task.service.AuthenticationService;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
@@ -24,8 +27,8 @@ public class AuthController {
     }
 
     @PostMapping
-    public ResponseEntity<TokenResponse> authorized(@RequestBody UserRequest userRequest){
-        Authentication authentication = authenticationService.authenticate(userRequest);
+    public ResponseEntity<TokenResponse> authorized(@RequestBody @Valid LoginRequest loginRequest){
+        Authentication authentication = authenticationService.authenticate(loginRequest);
         return new ResponseEntity<>(tokenService.createToken(authentication), HttpStatus.OK );
     }
 }

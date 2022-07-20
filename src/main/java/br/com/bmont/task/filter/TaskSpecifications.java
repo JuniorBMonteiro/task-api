@@ -17,7 +17,8 @@ public class TaskSpecifications {
                 predicates.add(criteriaBuilder.equal(root.<String>get("user"), params.getUser()));
             }
             if (Objects.nonNull(params.getTask())){
-                predicates.add(criteriaBuilder.equal(root.<String>get("task"), params.getTask()));
+                String like = "%" + params.getTask() + "%";
+                predicates.add(criteriaBuilder.like(root.<String>get("task"), like));
             }
             if (Objects.nonNull(params.getComplete())){
                 boolean complete = Boolean.parseBoolean(params.getComplete());

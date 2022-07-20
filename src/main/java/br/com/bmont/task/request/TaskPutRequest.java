@@ -1,8 +1,10 @@
 package br.com.bmont.task.request;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 public class TaskPutRequest {
+    @NotEmpty(message = "Id cannot be empty")
     private long id;
     private String task;
     private boolean complete;

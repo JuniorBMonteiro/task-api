@@ -15,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @RestController
@@ -39,12 +40,12 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskResponse> createTask(@AuthenticationPrincipal UserDetails userDetails, @RequestBody TaskPostRequest taskPostRequest){
+    public ResponseEntity<TaskResponse> createTask(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid TaskPostRequest taskPostRequest){
         return new ResponseEntity<>(taskService.createTask(userDetails, taskPostRequest), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<TaskResponse> updateTask(@AuthenticationPrincipal UserDetails userDetails, @RequestBody TaskPutRequest taskPutRequest){
+    public ResponseEntity<TaskResponse> updateTask(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid TaskPutRequest taskPutRequest){
         return new ResponseEntity<>(taskService.updateTask(userDetails, taskPutRequest), HttpStatus.OK);
     }
 

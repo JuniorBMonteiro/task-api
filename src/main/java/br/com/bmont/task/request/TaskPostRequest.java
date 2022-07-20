@@ -1,10 +1,14 @@
 package br.com.bmont.task.request;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class TaskPostRequest {
+    @NotNull(message = "Task cannot be null")
     private String task;
     private boolean complete;
+    @NotNull(message = "Date cannot be null")
     private LocalDateTime date;
 
     public TaskPostRequest() {
