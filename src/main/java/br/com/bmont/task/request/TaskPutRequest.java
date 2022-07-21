@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class TaskPutRequest {
     @NotEmpty(message = "Id cannot be empty")
-    private long id;
+    private Long id;
     private String task;
     private boolean complete;
     private LocalDateTime date;
@@ -13,18 +13,18 @@ public class TaskPutRequest {
     public TaskPutRequest() {
     }
 
-    public TaskPutRequest(long id, String task, boolean complete, LocalDateTime date) {
+    public TaskPutRequest(Long id, String task, boolean complete, LocalDateTime date) {
         this.id = id;
         this.task = task;
         this.complete = complete;
         this.date = date;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

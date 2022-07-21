@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String task;
     private boolean complete;
     private LocalDateTime date;
@@ -17,7 +17,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(long id, String task, boolean complete, LocalDateTime date, User user) {
+    public Task(Long id, String task, boolean complete, LocalDateTime date, User user) {
         this.id = id;
         this.task = task;
         this.complete = complete;
@@ -25,11 +25,11 @@ public class Task {
         this.user = user;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

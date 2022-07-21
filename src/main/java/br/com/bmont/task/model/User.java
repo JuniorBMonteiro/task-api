@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String username;
     private String email;
     private String password;
@@ -24,7 +24,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(long id, String username, String email, String password, String authorities) {
+    public User(Long id, String username, String email, String password, String authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -32,11 +32,11 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

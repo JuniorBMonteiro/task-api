@@ -3,7 +3,7 @@ package br.com.bmont.task.response;
 import java.time.LocalDateTime;
 
 public class TaskResponse {
-    private long id;
+    private Long id;
     private String task;
     private boolean complete;
     private LocalDateTime date;
@@ -11,18 +11,18 @@ public class TaskResponse {
     public TaskResponse() {
     }
 
-    public TaskResponse(long id, String task, boolean complete, LocalDateTime date) {
+    public TaskResponse(Long id, String task, boolean complete, LocalDateTime date) {
         this.id = id;
         this.task = task;
         this.complete = complete;
         this.date = date;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

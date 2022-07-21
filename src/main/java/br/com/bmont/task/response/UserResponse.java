@@ -1,24 +1,24 @@
 package br.com.bmont.task.response;
 
 public class UserResponse {
-    private long id;
+    private Long id;
     private String username;
     private String email;
 
     public UserResponse() {
     }
 
-    public UserResponse(long id, String username, String email) {
+    public UserResponse(Long id, String username, String email) {
         this.id = id;
         this.username = username;
         this.email = email;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
