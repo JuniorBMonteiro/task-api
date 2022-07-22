@@ -52,7 +52,6 @@ public class TaskService {
         return TaskMapper.toTaskResponse(taskSaved);
     }
 
-
     public void deleteTask(UserDetails userDetails, long taskId) {
         Task taskSaved = findTaskByIdOrThrowException(taskId);
         userIsOwner((User) userDetails, taskSaved);

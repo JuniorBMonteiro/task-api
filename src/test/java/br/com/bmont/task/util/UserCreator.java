@@ -1,6 +1,7 @@
 package br.com.bmont.task.util;
 
 import br.com.bmont.task.model.User;
+import br.com.bmont.task.request.UserRequest;
 
 public class UserCreator {
     public static User createUserWithoutId(){
@@ -15,5 +16,9 @@ public class UserCreator {
     public static User createUserWithId(){
         return new User(1L, "userTeste", "user@teste.com",
                 "teste", "USER");
+    }
+
+    public static UserRequest createUserRequest() {
+        return new UserRequest("userTeste", "user@teste.com", "teste");
     }
 }
