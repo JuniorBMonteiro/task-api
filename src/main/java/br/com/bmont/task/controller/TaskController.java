@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
@@ -32,8 +33,8 @@ public class TaskController {
                                                            @RequestParam(required = false) String task,
                                                            @RequestParam(required = false) String complete,
                                                            @RequestParam(required = false)
-                                                           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-                                                               LocalDateTime date,
+                                                           @DateTimeFormat(pattern = "yyyy-MM-dd")
+                                                               LocalDate date,
                                                            Pageable pageable){
         TaskFilterParam filter = new TaskFilterParam(task, complete, date, (User) userDetails);
         return new ResponseEntity<>(taskService.findAllTasks(filter, pageable), HttpStatus.OK);

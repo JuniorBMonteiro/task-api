@@ -2,18 +2,18 @@ package br.com.bmont.task.filter;
 
 import br.com.bmont.task.model.User;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class TaskFilterParam {
     private String task;
     private String complete;
-    private LocalDateTime date;
+    private LocalDate date;
     private User user;
 
     public TaskFilterParam() {
     }
 
-    public TaskFilterParam(String task, String complete, LocalDateTime date, User user) {
+    public TaskFilterParam(String task, String complete, LocalDate date, User user) {
         this.task = task;
         this.complete = complete;
         this.date = date;
@@ -36,11 +36,11 @@ public class TaskFilterParam {
         this.complete = complete;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

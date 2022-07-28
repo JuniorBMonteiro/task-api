@@ -15,7 +15,6 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-
     @Test
     void findByUsername_ReturnsUser_WhenSuccessful(){
         User userSaved = userRepository.save(UserCreator.createUserWithoutId());
