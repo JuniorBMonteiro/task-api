@@ -65,7 +65,7 @@ public class TaskService {
 
     private void userIsOwner(User user, Task task){
         if(!Objects.equals(task.getUser(), user)){
-            throw new PermissionIsMissingException("User not is owner");
+            throw new PermissionIsMissingException("User is not the owner");
         }
     }
 }

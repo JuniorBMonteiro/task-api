@@ -1,6 +1,7 @@
 package br.com.bmont.task.exception;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -18,17 +19,17 @@ import java.util.stream.Collectors;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<ExceptionDetails> handleEntityNotFoundException(EntityNotFoundException e){
-        return new ResponseEntity<>(createExceptionDetails(e), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createExceptionDetails(e, HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
     public ResponseEntity<ExceptionDetails> handlePermissionIsMissingException(PermissionIsMissingException e){
-        return new ResponseEntity<>(createExceptionDetails(e), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createExceptionDetails(e, HttpStatus.FORBIDDEN), HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler
     public ResponseEntity<ExceptionDetails> handleEntityAlreadyExistsException(EntityAlreadyExistsException e){
-        return new ResponseEntity<>(createExceptionDetails(e), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createExceptionDetails(e, HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -38,13 +39,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(createExceptionDetails(ex), headers, status);
+        return new ResponseEntity<>(createExceptionDetails(ex, HttpStatus.BAD_REQUEST), headers, status);
     }
 
-    private ExceptionDetails createExceptionDetails(Exception e){
+
+    private ExceptionDetails createExceptionDetails(Exception e, HttpStatus status){
         ExceptionDetails exceptionDetails = new ExceptionDetails();
-        exceptionDetails.setTitle("Bad Request Exception, Check the Documentation");
-        exceptionDetails.setStatus(HttpStatus.BAD_REQUEST.value());
+        exceptionDetails.setTitle(String.format("%s Exception, Check the Documentation", status.getReasonPhrase()));
+        exceptionDetails.setStatus(status.value());
         exceptionDetails.setDetails(e.getMessage());
         exceptionDetails.setDeveloperMessage(e.getClass().getName());
         exceptionDetails.setTimestamp(LocalDateTime.now());
