@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.aspectj.lang.annotation.control.CodeGenerationHint;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,6 +45,7 @@ public class TaskController {
             @ApiResponse(responseCode = "403", description = "The user is not authenticated",
                     content = @Content(schema = @Schema(implementation = Void.class) ))
     })
+
     @GetMapping
     public ResponseEntity<Page<TaskResponse>> findAllTasks(@AuthenticationPrincipal UserDetails userDetails,
                                                            @RequestParam(required = false) String task,
