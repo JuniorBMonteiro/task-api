@@ -246,7 +246,7 @@ public class TaskControllerIT {
         ResponseEntity<Void> response = testRestTemplate.exchange(pathParam, HttpMethod.DELETE, createEntity(),
                 new ParameterizedTypeReference<Void>() {});
 
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        Assertions.assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
     }
 
     @Test

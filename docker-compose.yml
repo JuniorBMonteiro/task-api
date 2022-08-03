@@ -2,38 +2,26 @@ version: '3.7'
 
 volumes:
   postgres:
-  pgadmin:
 
 services:
   postgres:
-    container_name: task_postgreSQL
+    container_name: postgres
     image: "postgres:12"
     environment:
-      POSTGRES_USER: "postgres"
+      POSTGRES_USER: "root"
       POSTGRES_PASSWORD: "root"
       PGDATA: "/data/postgres"
     volumes:
-      - postgres:/data/postgres
-      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+      - postgres:/var/lib/postgres/data
     ports:
-      - "15432:5432"
-    restart: unless-stopped
+      - "5432:5432"
 
-  pgadmin:
-    container_name: task_pgadmin
-    image: "dpage/pgadmin4:4.24"
+  task-api:
+    container_name: task_api
+    image: juniorbmonteiro/task-api
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin
-      PGADMIN_DEFAULT_PASSWORD: admin
-      PGADMIN_CONFIG_SERVER_MODE: "False"
-      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-      - ./docker_pgadmin_servers.json:/pgadmin4/servers.json
+      SPRING_PROFILES_ACTIVE: dev
     ports:
-      - "15433:80"
-    entrypoint:
-      - "/bin/sh"
-      - "-c"
-      - "/bin/echo 'postgres:5432:*:postgres:password' > /tmp/pgpassfile && chmod 600 /tmp/pgpassfile && /entrypoint.sh"
-    restart: unless-stopped
+      - "8080:8080"
+    depends_on:
+      - postgres
